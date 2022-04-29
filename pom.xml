@@ -20,24 +20,10 @@
         <module>fibo-server</module>
     </modules>
 
-
     <properties>
         <java.version>16</java.version>
     </properties>
     <dependencies>
-
-
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
