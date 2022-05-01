@@ -1,5 +1,7 @@
 upperLimitForGenerate: 4
 
+nameRouteEndpoint: "fibonacci.sequence"
+
 rsocket:
   server:
     host: "localhost"

@@ -1,13 +1,23 @@
 {
   "properties": [
     {
+      "name": "routeNameSequenceFibonacci",
+      "type": "java.lang.String",
+      "description": "Description for routeNameSequenceFibonacci."
+    },
+    {
       "name": "upperLimitForGenerate",
       "type": "java.lang.Long",
       "description": "Description for upperLimitForGenerate."
     },
     {
-      "name": "routeNameSequenceFibonacci",
+      "name": "rsocket.server.host",
       "type": "java.lang.String",
-      "description": "Description for routeNameSequenceFibonacci."
+      "description": "Description for rsocket.server.host."
+    },
+    {
+      "name": "rsocket.server.port",
+      "type": "java.lang.Integer",
+      "description": "Description for rsocket.server.port."
     }
   ] }

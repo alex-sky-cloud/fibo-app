@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @ActiveProfiles("test")
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class FibonacciSequenceImplTest {
+class FibonacciSequenceTest {
 
     @Value("${upperLimitForGenerate}")
     private long upperLimitForGenerate;
@@ -31,6 +31,9 @@ class FibonacciSequenceImplTest {
 
     @Value("${rsocket.server.port}")
     private Integer serverPort;
+
+    @Value("${nameRouteEndpoint}")
+    private String nameRouteEndpoint;
 
     @Autowired RSocketRequester.Builder builder;
 
@@ -51,7 +54,7 @@ class FibonacciSequenceImplTest {
     void generateFibonacciSequence() {
 
         RSocketRequester.RequestSpec route =
-                requester.route("fibonacci.sequence");
+                requester.route(this.nameRouteEndpoint);
 
         Flux<BigInteger> bigIntegerFlux = route.retrieveFlux(BigInteger.class);
 
