@@ -26,7 +26,6 @@ class FibonacciSequenceImplTest {
     @Value("${upperLimitForGenerate}")
     private long upperLimitForGenerate;
 
-    @Autowired
     private static RSocketRequester requester;
 
     private List<BigInteger> fibonacciSequence;
@@ -45,7 +44,7 @@ class FibonacciSequenceImplTest {
     void generateFibonacciSequence() {
 
         RSocketRequester.RequestSpec route =
-                this.requester.route("fibonacci.sequence");
+                requester.route("fibonacci.sequence");
 
         Flux<BigInteger> bigIntegerFlux = route.retrieveFlux(BigInteger.class);
 
