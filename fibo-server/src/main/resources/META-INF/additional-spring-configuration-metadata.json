@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "upperLimitForGenerate",
+      "type": "java.lang.String",
+      "description": "Description for upperLimitForGenerate."
+  }
+] }
