@@ -96,7 +96,6 @@ class FibonacciSequenceImplTest {
                 .collect(Collectors.toList());
     }
 
-    /*После выполнения всех тестовых узлов, закрыть ресурсы*/
     @AfterAll
     public static void cleanResources() {
         requester.dispose();
