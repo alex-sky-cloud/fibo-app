@@ -20,9 +20,8 @@ public class FibonacciClientController {
 
         int timeOut = 100;
 
-        return
-                this.fibonacciSequence.generateFibonacciSequence()
-                        .delayElements(Duration.ofMillis(timeOut));
+        return this.fibonacciSequence.generateFibonacciSequence()
+                .delayElements(Duration.ofMillis(timeOut));
 
     }
 }

@@ -26,15 +26,22 @@ class FibonacciSequenceImplTest {
     @Value("${upperLimitForGenerate}")
     private long upperLimitForGenerate;
 
+    @Value("${rsocket.server.host}")
+    private String localhost;
+
+    @Value("${rsocket.server.port}")
+    private Integer serverPort;
+
+    @Autowired RSocketRequester.Builder builder;
+
     private static RSocketRequester requester;
 
     private List<BigInteger> fibonacciSequence;
 
     @BeforeAll
-    public void setupOnce(@Autowired RSocketRequester.Builder builder,
-                          @Value("${spring.rsocket.server.port}") Integer port) {
+    public void setupOnce() {
         requester = builder
-                .tcp("localhost", port);
+                .tcp(this.localhost, this.serverPort);
 
         fibonacciSequence = generateBigFibonacciSequence();
     }

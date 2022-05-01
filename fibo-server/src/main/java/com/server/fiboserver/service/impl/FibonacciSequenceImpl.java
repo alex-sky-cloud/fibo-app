@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public class FibonacciSequenceImpl implements FibonacciSequence {
 
     @Value("${upperLimitForGenerate}")
-    private long upperLimitForGenerate;
+    private Long upperLimitForGenerate;
 
     @Override
     public Flux<BigInteger> generateFibonacciSequence(){

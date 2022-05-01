@@ -5,3 +5,5 @@ spring:
       transport: tcp
 
 upperLimitForGenerate: 50
+
+routeNameSequenceFibonacci: "fibonacci.sequence"

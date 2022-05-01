@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "rsocket.server.port",
+      "type": "java.lang.Integer",
+      "description": "Description for rsocket.server.port."
+    },
+    {
+      "name": "rsocket.server.host",
+      "type": "java.lang.String",
+      "description": "Description for rsocket.server.host."
+    }
+  ] }
