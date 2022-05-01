@@ -3,3 +3,5 @@ spring:
     server:
       port: 7000
       transport: tcp
+
+upperLimitForGenerate: 50
