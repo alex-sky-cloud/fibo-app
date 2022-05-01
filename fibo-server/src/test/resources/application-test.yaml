@@ -1,1 +1,6 @@
 upperLimitForGenerate: 4
+
+rsocket:
+  server:
+    host: "localhost"
+    port: 7000

@@ -2,7 +2,12 @@
   "properties": [
     {
       "name": "upperLimitForGenerate",
-      "type": "java.lang.String",
+      "type": "java.lang.Long",
       "description": "Description for upperLimitForGenerate."
-  }
-] }
+    },
+    {
+      "name": "routeNameSequenceFibonacci",
+      "type": "java.lang.String",
+      "description": "Description for routeNameSequenceFibonacci."
+    }
+  ] }
