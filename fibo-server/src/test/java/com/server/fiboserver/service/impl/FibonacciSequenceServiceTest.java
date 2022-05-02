@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @ActiveProfiles("test")
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class FibonacciSequenceTest {
+class FibonacciSequenceServiceTest {
 
     @Value("${upperLimitForGenerate}")
     private long upperLimitForGenerate;

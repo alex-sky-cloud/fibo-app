@@ -15,16 +15,15 @@ import java.math.BigInteger;
 @RequiredArgsConstructor
 @RestController()
 @RequestMapping("fibonacci")
-public class FibonacciHandlerController {
+public class FibonacciController {
 
     private final RSocketRequester requester;
 
-    @Value("${routeNameSequenceFibonacci}")
-    private final String routeNameSequenceFibonacci;
+    @Value("${rsocket.server.routeNameSequenceFibonacci}")
+    private String routeNameSequenceFibonacci;
 
     @GetMapping("sequence")
     Flux<BigInteger> getSequenceFibonacci(){
-
 
         RSocketRequester.RequestSpec route =
                 requester.route(this.routeNameSequenceFibonacci);

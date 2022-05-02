@@ -1,6 +1,6 @@
 package com.server.fiboserver.service.impl;
 
-import com.server.fiboserver.service.FibonacciSequence;
+import com.server.fiboserver.service.FibonacciSequenceService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @Service
-public class FibonacciSequenceImpl implements FibonacciSequence {
+public class FibonacciSequenceServiceImpl implements FibonacciSequenceService {
 
     @Value("${upperLimitForGenerate}")
     private Long upperLimitForGenerate;

@@ -1,0 +1,5 @@
+size:
+  fibonacci:
+    sequence: 50
+
+nameRouteFibonacciSequenceAll: "fibonacci/sequence"

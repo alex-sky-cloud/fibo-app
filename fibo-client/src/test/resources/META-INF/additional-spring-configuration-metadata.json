@@ -11,8 +11,13 @@
       "description": "Description for rsocket.server.host."
     },
     {
-      "name": "rsocket.server.routeNameSequenceFibonacci",
+      "name": "nameRouteFibonacciSequenceAll",
       "type": "java.lang.String",
       "description": "Description for rsocket.server.routeNameSequenceFibonacci."
+    },
+    {
+      "name": "size.fibonacci.sequence",
+      "type": "java.lang.Integer",
+      "description": "Description for size.fibonacci.sequence."
     }
   ] }

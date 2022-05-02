@@ -1,6 +1,6 @@
 package com.server.fiboserver.controller;
 
-import com.server.fiboserver.service.FibonacciSequence;
+import com.server.fiboserver.service.FibonacciSequenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
@@ -11,9 +11,9 @@ import java.time.Duration;
 
 @Controller
 @RequiredArgsConstructor
-public class FibonacciClientController {
+public class FibonacciSequenceController {
 
-    private final FibonacciSequence fibonacciSequence;
+    private final FibonacciSequenceService fibonacciSequenceService;
 
     @MessageMapping("fibonacci.sequence")
     public Flux<BigInteger> getSequenceFibonacci() {
@@ -21,7 +21,7 @@ public class FibonacciClientController {
         int timeOut = 100;
 
         return
-                this.fibonacciSequence.generateFibonacciSequence()
+                this.fibonacciSequenceService.generateFibonacciSequence()
                         .delayElements(Duration.ofMillis(timeOut));
 
     }

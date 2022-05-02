@@ -4,7 +4,7 @@ import reactor.core.publisher.Flux;
 
 import java.math.BigInteger;
 
-public interface FibonacciSequence {
+public interface FibonacciSequenceService {
 
     Flux<BigInteger> generateFibonacciSequence();
 }
