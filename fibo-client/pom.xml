@@ -13,8 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>fibo-client</name>
     <description>fibo-client</description>
-
-
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

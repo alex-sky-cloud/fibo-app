@@ -12,8 +12,11 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.math.BigInteger;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @ActiveProfiles("test")
@@ -30,12 +33,15 @@ class FibonacciControllerTest {
     @Value("${nameRouteFibonacciSequenceAll}")
     private String nameRouteFibonacciSequenceAll;
 
-    private BigInteger [] fibonacciSequence;
+    @Value("${nameRouteSumFibonacciSequenceFromRange}")
+    private String nameRouteSumFibonacciSequenceFromRange;
+
+    private BigInteger[] fibonacciSequence;
 
     @BeforeEach
     public void setUp() {
 
-        int safeTimeout = 30_000;
+        int safeTimeout = 10_000;
 
         webClient = webClient.mutate()
                 .responseTimeout(Duration.ofMillis(safeTimeout))
@@ -49,7 +55,9 @@ class FibonacciControllerTest {
     @DisplayName("Should get all 'Fibonacci sequence'")
     void getSequenceFibonacci() {
 
-        webClient.get().uri(nameRouteFibonacciSequenceAll)
+        webClient
+                .get()
+                .uri(nameRouteFibonacciSequenceAll)
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(APPLICATION_JSON_VALUE)
@@ -59,23 +67,64 @@ class FibonacciControllerTest {
 
     }
 
-    private BigInteger [] generateBigFibonacciSequence() {
+    private BigInteger[] generateBigFibonacciSequence() {
 
         int firstIndexFibonacciMember = 0;
         int secondIndexFibonacciMember = 1;
 
-         return Stream.iterate(
+        return Stream.iterate(
                         new BigInteger[]{
                                 BigInteger.ZERO, BigInteger.ONE
                         },
                         arr -> new BigInteger[]{
                                 arr[secondIndexFibonacciMember],
                                 arr[firstIndexFibonacciMember]
-                                        .add(arr[secondIndexFibonacciMember])/*add() - это операция сложения*/
+                                        .add(arr[secondIndexFibonacciMember])
                         }
                 )
                 .limit(this.sizeFibonacciSequence)
                 .map(arrFibonacci -> arrFibonacci[firstIndexFibonacciMember])
-                .toArray(BigInteger[] :: new);
+                .toArray(BigInteger[]::new);
+    }
+
+    @Test
+    @DisplayName("Should get sum for members 'Fibonacci sequence' from given range")
+    void getSumSequenceFibonacciFromRange() {
+
+        String startRange = "21";
+        String endRange = "35";
+
+        BigInteger startRangeFibonacci = new BigInteger(startRange);
+        BigInteger endRangeFibonacci = new BigInteger(endRange);
+        BigInteger expectedSum =
+                calculateSumValuesFromRangeFibonacciSequence(startRangeFibonacci, endRangeFibonacci);
+
+        webClient
+                .get()
+                .uri(this.nameRouteSumFibonacciSequenceFromRange, startRange, endRange)
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType(APPLICATION_JSON_VALUE)
+                .expectBody(BigInteger.class)
+                .isEqualTo(expectedSum);
+    }
+
+    private BigInteger calculateSumValuesFromRangeFibonacciSequence(BigInteger startRange,
+                                                                    BigInteger finishRange) {
+
+        List<BigInteger> fibonacciSequenceBigSize =
+                Arrays
+                        .stream(generateBigFibonacciSequence())
+                        .collect(toList());
+
+        int comparisonStandard = 0;
+
+        return fibonacciSequenceBigSize
+                .stream()
+                .filter(memberFibonacci ->
+                        memberFibonacci.compareTo(startRange) >= comparisonStandard)
+                .filter(memberFibonacci ->
+                        memberFibonacci.compareTo(finishRange) <= comparisonStandard)
+                .reduce(BigInteger.ZERO, BigInteger::add);
     }
 }

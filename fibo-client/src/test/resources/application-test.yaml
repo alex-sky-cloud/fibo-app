@@ -2,4 +2,5 @@ size:
   fibonacci:
     sequence: 50
 
-nameRouteFibonacciSequenceAll: "fibonacci/sequence"
+nameRouteFibonacciSequenceAll: "fibonacci/v1/sequence"
+nameRouteSumFibonacciSequenceFromRange: "fibonacci/v1/sequence/range/{startRange}/{endRange}"
