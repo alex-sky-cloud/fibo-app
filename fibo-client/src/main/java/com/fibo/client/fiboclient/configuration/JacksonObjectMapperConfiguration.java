@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 import java.math.BigInteger;
 
-@Configuration
+//@Configuration
 public class JacksonObjectMapperConfiguration {
 
-    @Autowired
-    public void serializeBigDecimal(ObjectMapper objectMapper) {
+  //  @Autowired
+    public void serializeBigInteger(ObjectMapper objectMapper) {
 
         JsonFormat.Value formatValue =
                 JsonFormat.Value.forShape(JsonFormat.Shape.STRING);

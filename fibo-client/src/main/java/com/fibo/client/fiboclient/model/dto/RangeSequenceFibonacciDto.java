@@ -1,5 +1,6 @@
 package com.fibo.client.fiboclient.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 import reactor.core.publisher.Flux;

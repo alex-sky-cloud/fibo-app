@@ -1,11 +1,10 @@
 package com.fibo.client.fiboclient.service;
 
 import com.fibo.client.fiboclient.model.dto.RangeSequenceFibonacciDto;
+import com.fibo.client.fiboclient.model.dto.ResultCalculateSumSequenceDto;
 import reactor.core.publisher.Mono;
-
-import java.math.BigInteger;
 
 public interface FibonacciSumValuesService {
 
-    Mono<BigInteger> getSumRangeValuesFibonacciSequence(RangeSequenceFibonacciDto rangeSequenceFibonacci);
+    Mono<ResultCalculateSumSequenceDto> getSumRangeValuesFibonacciSequence(RangeSequenceFibonacciDto rangeSequenceFibonacci);
 }

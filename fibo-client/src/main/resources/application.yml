@@ -6,3 +6,7 @@ rsocket:
     port: 7000
     host: "localhost"
     routeNameSequenceFibonacci: "fibonacci.sequence"
+
+size:
+  fibonacci:
+    sequence: 50

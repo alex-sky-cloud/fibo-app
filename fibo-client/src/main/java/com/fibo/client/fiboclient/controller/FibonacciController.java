@@ -1,6 +1,7 @@
 package com.fibo.client.fiboclient.controller;
 
 import com.fibo.client.fiboclient.model.dto.RangeSequenceFibonacciDto;
+import com.fibo.client.fiboclient.model.dto.ResultCalculateSumSequenceDto;
 import com.fibo.client.fiboclient.model.mapper.RangeSequenceFibonacciMapper;
 import com.fibo.client.fiboclient.service.FibonacciSumValuesService;
 import com.fibo.client.fiboclient.validate.ValidateRangeFibonacciSequence;
@@ -41,25 +42,27 @@ public class FibonacciController {
     }
 
     @GetMapping("v1/sequence/range/{startRange}/{endRange}")
-    Mono<BigInteger> getSumSequenceFibonacciFromRange(
+    Mono<ResultCalculateSumSequenceDto> getSumSequenceFibonacciFromRange(
             @PathVariable BigInteger startRange,
             @PathVariable BigInteger endRange) {
+
+        this.validateRangeFibonacciSequence
+                .validateManagerGivenRange(startRange, endRange);
 
         Flux<BigInteger> fibonacciSequenceFlux = getFibonacciSequenceGenerated();
         RangeSequenceFibonacciDto fibonacciDto = this.fibonacciMapper
                 .transformToFibonacciDto(fibonacciSequenceFlux, startRange, endRange);
 
-        this.validateRangeFibonacciSequence.validateRangeForFibonacciSequence(fibonacciDto);
-
-        return this.fibonacciSumValuesService
+        Mono<ResultCalculateSumSequenceDto> sum = this.fibonacciSumValuesService
                 .getSumRangeValuesFibonacciSequence(fibonacciDto);
 
+        return sum;
     }
 
     private Flux<BigInteger> getFibonacciSequenceGenerated() {
 
         RSocketRequester.RequestSpec route =
-                requester.route(this.routeNameSequenceFibonacci);
+                this.requester.route(this.routeNameSequenceFibonacci);
 
         return route.retrieveFlux(BigInteger.class);
     }

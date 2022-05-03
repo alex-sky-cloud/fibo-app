@@ -1,9 +1,7 @@
 package com.fibo.client.fiboclient.controller;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.fibo.client.fiboclient.model.dto.ResultCalculateSumSequenceDto;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -91,22 +89,34 @@ class FibonacciControllerTest {
     @DisplayName("Should get sum for members 'Fibonacci sequence' from given range")
     void getSumSequenceFibonacciFromRange() {
 
-        String startRange = "21";
-        String endRange = "35";
+        String startRangeSequence = "21";
+        String endRangeSequence = "34";
 
-        BigInteger startRangeFibonacci = new BigInteger(startRange);
-        BigInteger endRangeFibonacci = new BigInteger(endRange);
+        BigInteger startRangeFibonacci = new BigInteger(startRangeSequence);
+        BigInteger endRangeFibonacci = new BigInteger(endRangeSequence);
         BigInteger expectedSum =
                 calculateSumValuesFromRangeFibonacciSequence(startRangeFibonacci, endRangeFibonacci);
 
-        webClient
+        ResultCalculateSumSequenceDto responseBody = webClient
                 .get()
-                .uri(this.nameRouteSumFibonacciSequenceFromRange, startRange, endRange)
+                .uri(this.nameRouteSumFibonacciSequenceFromRange, startRangeSequence, endRangeSequence)
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().contentType(APPLICATION_JSON_VALUE)
-                .expectBody(BigInteger.class)
-                .isEqualTo(expectedSum);
+                .expectBody(ResultCalculateSumSequenceDto.class)
+                .returnResult()
+                .getResponseBody();
+
+        BigInteger sumSequenceActual = responseBody.getSumSequence();
+        Assertions.assertEquals(expectedSum, sumSequenceActual);
+
+        BigInteger[] sequenceRangeActual = responseBody.getSequenceRange();
+        BigInteger[] sequenceRangeExpected = new BigInteger[]{
+                startRangeFibonacci, endRangeFibonacci
+        };
+
+       Assertions.assertArrayEquals(sequenceRangeExpected, sequenceRangeActual);
+
     }
 
     private BigInteger calculateSumValuesFromRangeFibonacciSequence(BigInteger startRange,
